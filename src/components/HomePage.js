@@ -7,6 +7,13 @@ class HomePage extends Component {
     return (
       <div>
         <h1>HomePage</h1>
+        <ul className="list-group">
+          {this.props.questionId.map((id) => (
+            <li key={id} className="list-group-item">
+              <div>questionId: {id}</div>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
@@ -14,7 +21,7 @@ class HomePage extends Component {
 
 function mapStateToProps({ questions }) {
   return {
-    questionsId: Object.keys(questions).sort(
+    questionId: Object.keys(questions).sort(
       (a, b) => questions[b].timestamp - questions[a].timestamp
     ),
   };
