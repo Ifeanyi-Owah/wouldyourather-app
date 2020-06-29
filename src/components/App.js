@@ -5,6 +5,9 @@ import { handleInitialData } from "../actions/shared";
 import HomePage from "./HomePage";
 import "./App.css";
 import NavBar from "./NavBar";
+import LeaderBoard from "./LeaderBoard";
+import NewPollQuestionsForm from "./NewPollQuestionsForm";
+import NotFoundPage from "./NotFoundPage";
 
 class App extends Component {
   componentDidMount() {
@@ -15,7 +18,17 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <NavBar />
-          {this.props.loading === true ? null : <HomePage />}
+          <Switch>
+            {/* {this.props.loading === true ? null : <HomePage />} */}
+            <Route
+              exact
+              path="/"
+              render={() => (this.props.loading === true ? null : <HomePage />)}
+            />
+            <Route exact path="/add" render={() => <NewPollQuestionsForm />} />
+            <Route exact path="/leaderboard" render={() => <LeaderBoard />} />
+            <Route render={() => <NotFoundPage />} />
+          </Switch>
         </div>
       </BrowserRouter>
     );

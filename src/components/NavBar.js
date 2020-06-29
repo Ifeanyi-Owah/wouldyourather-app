@@ -1,13 +1,25 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+
+const navlinks = ["add", "leaderboard"];
 
 class NavBar extends Component {
   render() {
+    const navLink = navlinks.map((link) => {
+      return (
+        <li>
+          <NavLink exact to={`/${link}`} className="nav-link" key={link}>
+            {link}
+          </NavLink>
+        </li>
+      );
+    });
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <a className="navbar-brand" href="#">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+          <NavLink exact to="/" className="navbar-brand">
             Navbar
-          </a>
+          </NavLink>
           <button
             className="navbar-toggler"
             type="button"
@@ -22,25 +34,11 @@ class NavBar extends Component {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item active">
-                <a className="nav-link" href="#">
+                <NavLink exact to="/" className="nav-link">
                   Home <span className="sr-only">(current)</span>
-                </a>
+                </NavLink>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  New Question
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Leader Board
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link disabled" href="#">
-                  Disabled
-                </a>
-              </li>
+              {navLink}
             </ul>
           </div>
         </nav>
