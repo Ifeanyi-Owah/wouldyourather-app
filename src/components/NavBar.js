@@ -7,7 +7,7 @@ class NavBar extends Component {
   render() {
     const navLink = navlinks.map((link) => {
       return (
-        <li>
+        <li key={link}>
           <NavLink exact to={`/${link}`} className="nav-link" key={link}>
             {link}
           </NavLink>
