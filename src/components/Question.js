@@ -8,6 +8,9 @@ class Question extends Component {
     console.log(this.props);
     const { question, user } = this.props;
     console.log(user);
+    if (question === null) {
+      return <p>This question doesn't exist</p>;
+    }
     return (
       <li className="list-group-item shadow p-0 mb-5 bg-white rounded card">
         <div className="card-header">
@@ -20,7 +23,7 @@ class Question extends Component {
         </div>
         <div className="d-flex p-4">
           <img
-            className="rounded-circle w-25 ml-2"
+            className="rounded-circle w-25 ml-2 mr-4"
             src={user.avatarURL}
             style={{
               // width: "100px",
@@ -29,11 +32,14 @@ class Question extends Component {
             }}
             alt={`Avatar of ${user.name}`}
           />
-          <div className="w-75">
-            <h3>Would you rather</h3>
+          <div className="w-75 text-left pl-3 border-left">
+            {/* // review inline style */}
+            <h3 className="font-weight-bold" style={{ fontSize: "18px" }}>
+              Would you rather
+            </h3>
             <p>{question.optionOne.text}</p>
             <p className="d-none">{question.optionTwo.text}</p>
-            <Link>View Details</Link>
+            <Link className="border border-info w-75 pr-5 pl-5">View Poll</Link>
           </div>
         </div>
       </li>
@@ -47,11 +53,13 @@ function mapStateToProps({ authedUser, users, questions }, { id }) {
   return {
     authedUser,
     user,
-    question: formatQuestion({
-      optionOneText: question.optionOne.text,
-      optionTwoText: question.optionTwo.text,
-      author: question.author,
-    }),
+    question: question
+      ? formatQuestion({
+          optionOneText: question.optionOne.text,
+          optionTwoText: question.optionTwo.text,
+          author: question.author,
+        })
+      : null,
   };
 }
 

@@ -6,14 +6,17 @@ class HomePage extends Component {
   render() {
     console.log(this.props);
     return (
-      <ul
-        className="list-group mt-2 card p-3"
-        style={{ width: "600px", margin: "0 auto" }}
+      <div
+        style={{ outline: "1px solid blue", width: "600px", margin: "0 auto" }}
       >
-        {this.props.questionId.map((id) => (
-          <Question id={id} key={id} />
-        ))}
-      </ul>
+        <button className="w-50">unaswered</button>
+        <button className="w-50">anwered</button>
+        <ul className="list-group mt-2 card p-3">
+          {this.props.questionId.map((id) => (
+            <Question id={id} key={id} />
+          ))}
+        </ul>
+      </div>
     );
   }
 }
