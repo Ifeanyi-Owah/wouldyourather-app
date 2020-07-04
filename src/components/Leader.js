@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { formatQuestion } from "../utils/helper";
 
 class Leader extends Component {
   render() {
     console.log(this.props);
-    const { question, user } = this.props;
+    const { user } = this.props;
     return (
       <li className="list-group-item shadow pt-3 pb-3 mb-5 bg-white rounded card">
         <div className="d-flex">
@@ -30,18 +29,18 @@ class Leader extends Component {
 }
 
 function mapStateToProps({ authedUser, users, questions }, { id }) {
-  const question = questions[id];
-  const user = users[question.author];
+  const user = users[id];
+
   return {
     authedUser,
     user,
-    question: question
-      ? formatQuestion({
-          optionOneText: question.optionOne.text,
-          optionTwoText: question.optionTwo.text,
-          author: question.author,
-        })
-      : null,
+    // question: question
+    //   ? formatQuestion({
+    //       optionOneText: question.optionOne.text,
+    //       optionTwoText: question.optionTwo.text,
+    //       author: question.author,
+    //     })
+    //   : null,
   };
 }
 

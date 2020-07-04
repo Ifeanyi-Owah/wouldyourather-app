@@ -7,7 +7,7 @@ class LeaderBoard extends Component {
     return (
       <div style={{ width: "700px", margin: "0 auto" }}>
         <ul className="list-group mt-2 p-3">
-          {this.props.questionId.map((id) => (
+          {this.props.userId.map((id) => (
             <Leader id={id} key={id} />
           ))}
           {/* <Leader />
@@ -19,11 +19,9 @@ class LeaderBoard extends Component {
   }
 }
 
-function mapStateToProps({ questions }) {
+function mapStateToProps({ users }) {
   return {
-    questionId: Object.keys(questions).sort(
-      (a, b) => questions[b].timestamp - questions[a].timestamp
-    ),
+    userId: Object.keys(users),
   };
 }
 
