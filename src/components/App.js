@@ -8,6 +8,7 @@ import NavBar from "./NavBar";
 import LeaderBoard from "./LeaderBoard";
 import NewPollQuestionsForm from "./NewPollQuestionsForm";
 import NotFoundPage from "./NotFoundPage";
+import LoadingBar from "react-redux-loading";
 
 class App extends Component {
   componentDidMount() {
@@ -18,8 +19,8 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <NavBar />
+          <LoadingBar />
           <Switch>
-            {/* {this.props.loading === true ? null : <HomePage />} */}
             <Route
               exact
               path="/"

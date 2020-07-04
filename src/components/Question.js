@@ -39,7 +39,9 @@ class Question extends Component {
             </h3>
             <p>{question.optionOne.text}</p>
             <p className="d-none">{question.optionTwo.text}</p>
-            <Link className="border border-info w-75 pr-5 pl-5">View Poll</Link>
+            <Link className="btn border border-success w-100 pr-5 pl-5 bg-light text-success mt-4">
+              View Poll
+            </Link>
           </div>
         </div>
       </li>

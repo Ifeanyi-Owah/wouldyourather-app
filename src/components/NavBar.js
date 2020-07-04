@@ -16,7 +16,7 @@ class NavBar extends Component {
     });
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-success">
           <NavLink exact to="/" className="navbar-brand">
             Navbar
           </NavLink>

@@ -7,11 +7,16 @@ class HomePage extends Component {
     console.log(this.props);
     return (
       <div
+        className="mt-4"
         style={{ outline: "1px solid blue", width: "600px", margin: "0 auto" }}
       >
-        <button className="w-50">unaswered</button>
-        <button className="w-50">anwered</button>
-        <ul className="list-group mt-2 card p-3">
+        <button className="btn btn-light border border-right w-50">
+          unaswered
+        </button>
+        <button className="btn btn-light border border-left w-50 ">
+          anwered
+        </button>
+        <ul className="list-group mt-0 card p-3">
           {this.props.questionId.map((id) => (
             <Question id={id} key={id} />
           ))}
