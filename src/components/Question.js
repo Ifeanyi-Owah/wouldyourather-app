@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 class Question extends Component {
   render() {
     console.log(this.props);
-    const { question, user } = this.props;
-    console.log(user);
+    const { question, user, authedUser } = this.props;
+    console.log(authedUser);
     if (question === null) {
       return <p>This question doesn't exist</p>;
     }

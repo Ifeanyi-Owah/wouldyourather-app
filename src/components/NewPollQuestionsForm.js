@@ -32,14 +32,19 @@ class NewPollQuestionsForm extends Component {
     }
     return (
       <div
-        className="card bg-light text-left"
+        className="card bg-light text-left mt-4"
         style={{ width: "500px", margin: "0 auto" }}
       >
-        <h1 className="card-header">Create New Question</h1>
-        <h2>Complete the question</h2>
-        <form action className="p-2">
+        <h2 className="card-header text-center display-5 font-weight-bold">
+          Create New Question
+        </h2>
+        <p className="pl-3 pt-3 mb-0">Complete the question:</p>
+        <form action className="p-3 mt-0">
           <div className="form-group text-left">
-            <label htmlFor="optionone">Would You Rather...</label>
+            <label htmlFor="optionone"></label>
+            <span className="font-weight-bold mb-2 d-block">
+              Would You rather...
+            </span>
             <input
               type="text"
               name="optionone"
@@ -52,7 +57,8 @@ class NewPollQuestionsForm extends Component {
           </div>
           {/* <h2>OR</h2> */}
           <div className="form-group">
-            <label htmlFor="optiontwo">OR</label>
+            <label htmlFor="optiontwo"></label>
+            <span className="text-center font-weight-bold d-block">OR</span>
             <input
               type="text"
               name="optiontwo"
@@ -65,7 +71,7 @@ class NewPollQuestionsForm extends Component {
           </div>
           <button
             type="submit"
-            class="btn btn-primary w-100"
+            class="btn btn-success w-100"
             onClick={this.handleClick}
           >
             Submit

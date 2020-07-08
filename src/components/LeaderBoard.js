@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import Leader from "./Leader";
 
 class LeaderBoard extends Component {
+  state = {
+    question: "unanswered",
+  };
   render() {
     return (
       <div style={{ width: "700px", margin: "0 auto" }}>
@@ -26,7 +29,7 @@ class LeaderBoard extends Component {
   }
 }
 
-function mapStateToProps({ users, authedUser }) {
+function mapStateToProps({ users }) {
   const userId = Object.keys(users);
   const userLeader = userId
     .map((id) => {
@@ -42,7 +45,6 @@ function mapStateToProps({ users, authedUser }) {
   console.log(userLeader);
   return {
     userLeader,
-    authedUser,
   };
 }
 

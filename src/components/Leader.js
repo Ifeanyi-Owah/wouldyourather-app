@@ -69,10 +69,11 @@ class Leader extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
-  return {
-    authedUser,
-  };
-}
+// function mapStateToProps({ authedUser }) {
+//   return {
+//     authedUser,
+//   };
+// }
 
-export default connect(mapStateToProps)(Leader);
+// export default connect(mapStateToProps)(Leader);
+export default Leader;
