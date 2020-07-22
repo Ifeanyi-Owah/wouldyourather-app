@@ -10,27 +10,42 @@ import NewPollQuestionsForm from "./NewPollQuestionsForm";
 import NotFoundPage from "./NotFoundPage";
 import LoadingBar from "react-redux-loading";
 import Login from "./Login";
+import ProtectedRoute from "./ProtectedRoute";
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
   }
+
+  state = {
+    isLogin: false,
+  };
+
   render() {
+    const { isLogin } = this.state;
     return (
       <BrowserRouter>
         <div className="App">
-          <NavBar />
+          <NavBar isLogin={isLogin} />
           <LoadingBar />
           <Switch>
-            <Route exact path="/" render={() => <Login />} />
-            <Route
+            <Route exact path="/login" render={() => <Login />} />
+            <ProtectedRoute
               exact
-              path="/home"
+              path="/"
               render={() => (this.props.loading === true ? null : <HomePage />)}
             />
-            <Route exact path="/add" render={() => <NewPollQuestionsForm />} />
-            <Route exact path="/leaderboard" render={() => <LeaderBoard />} />
-            <Route render={() => <NotFoundPage />} />
+            <ProtectedRoute
+              exact
+              path="/add"
+              render={() => <NewPollQuestionsForm />}
+            />
+            <ProtectedRoute
+              exact
+              path="/leaderboard"
+              render={() => <LeaderBoard />}
+            />
+            <ProtectedRoute render={() => <NotFoundPage />} />
           </Switch>
         </div>
       </BrowserRouter>

@@ -17,7 +17,7 @@ class NavBar extends Component {
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-success">
-          <NavLink exact to="/home" className="navbar-brand">
+          <NavLink exact to="/" className="navbar-brand">
             Navbar
           </NavLink>
           <button
@@ -34,7 +34,7 @@ class NavBar extends Component {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item active">
-                <NavLink exact to="/home" className="nav-link">
+                <NavLink exact to="/" className="nav-link">
                   Home <span className="sr-only">(current)</span>
                 </NavLink>
               </li>
