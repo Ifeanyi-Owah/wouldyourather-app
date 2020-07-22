@@ -9,6 +9,7 @@ import LeaderBoard from "./LeaderBoard";
 import NewPollQuestionsForm from "./NewPollQuestionsForm";
 import NotFoundPage from "./NotFoundPage";
 import LoadingBar from "react-redux-loading";
+import Login from "./Login";
 
 class App extends Component {
   componentDidMount() {
@@ -21,9 +22,10 @@ class App extends Component {
           <NavBar />
           <LoadingBar />
           <Switch>
+            <Route exact path="/" render={() => <Login />} />
             <Route
               exact
-              path="/"
+              path="/home"
               render={() => (this.props.loading === true ? null : <HomePage />)}
             />
             <Route exact path="/add" render={() => <NewPollQuestionsForm />} />

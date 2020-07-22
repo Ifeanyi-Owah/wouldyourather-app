@@ -15,7 +15,3 @@ export function formatQuestion({ optionOneText, optionTwoText, author }) {
     },
   };
 }
-
-export function getUserAnswer(id, users) {
-  return users[id].answers;
-}

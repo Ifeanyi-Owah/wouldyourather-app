@@ -8,6 +8,7 @@ class HomePage extends Component {
   };
   state = {
     question: "unanswered",
+    color: "black",
   };
 
   handleClick = (rank) => {
@@ -37,31 +38,13 @@ class HomePage extends Component {
         style={{ outline: "1px solid blue", width: "600px", margin: "0 auto" }}
       >
         {this.props.questionsRank.map((r) => (
-          // <input
-          //   className="btn btn-light border border-right w-50 text-success font-weight-bold"
-          //   value={r}
-          //   name={r}
-          //   onClick={this.handleClick}
-          // />
           <button
-            className={`btn btn-light border border-right w-50 font-weight-bold1 ${this.state.color}`}
+            className={`btn btn-light border border-right w-50 font-weight-bold ${this.state.color}`}
             onClick={() => this.handleClick(r)}
           >
             {r}
           </button>
         ))}
-        {/* <button
-          className="btn btn-light border border-right w-50 text-success font-weight-bold"
-          onClick={this.handleClick}
-        >
-          Unaswered Questions
-        </button>
-        <button
-          className="btn btn-white border border-left w-50 font-weight-bold"
-          onClick={this.handleAnswered}
-        >
-          Answered Questions
-        </button> */}
         <ul className="list-group mt-0 card p-3">
           {this.state.question === "unanswered"
             ? unanswered.map((question) => (

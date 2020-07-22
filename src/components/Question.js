@@ -7,7 +7,7 @@ class Question extends Component {
   render() {
     console.log(this.props);
     const { question, user, authedUser } = this.props;
-    console.log(authedUser);
+    console.log(authedUser, question.author);
     if (question === null) {
       return <p>This question doesn't exist</p>;
     }

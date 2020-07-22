@@ -4,19 +4,19 @@ import { Redirect } from "react-router-dom";
 class NewPollQuestionsForm extends Component {
   state = {
     redirectToHome: false,
-    optionone: "",
-    optiontwo: "",
+    optionOneText: "",
+    optionTwoText: "",
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({
-      redirectToHome: true,
-    });
-  };
+    // this.setState({
+    //   redirectToHome: true,
+    // });
 
-  handleClick = (e) => {
-    this.handleSubmit();
+    this.setState({
+      [e.target.name]: "",
+    });
   };
 
   handleChange = (e) => {
@@ -26,10 +26,7 @@ class NewPollQuestionsForm extends Component {
   };
 
   render() {
-    const { redirectToHome } = this.state;
-    if (redirectToHome === true) {
-      return <Redirect to="/" />;
-    }
+    const { optionOneText, optionTwoText } = this.state;
     return (
       <div
         className="card bg-light text-left mt-4"
@@ -39,7 +36,7 @@ class NewPollQuestionsForm extends Component {
           Create New Question
         </h2>
         <p className="pl-3 pt-3 mb-0">Complete the question:</p>
-        <form action className="p-3 mt-0">
+        <form action className="p-3 mt-0" onSubmit={this.handleSubmit}>
           <div className="form-group text-left">
             <label htmlFor="optionone"></label>
             <span className="font-weight-bold mb-2 d-block">
@@ -47,11 +44,11 @@ class NewPollQuestionsForm extends Component {
             </span>
             <input
               type="text"
-              name="optionone"
+              name="optionOneText"
               className="form-control"
               id="optionone"
               placeholder="Enter Option One Text Here"
-              value={this.state.optionOne}
+              value={optionOneText}
               onChange={this.handleChange}
             />
           </div>
@@ -61,11 +58,11 @@ class NewPollQuestionsForm extends Component {
             <span className="text-center font-weight-bold d-block">OR</span>
             <input
               type="text"
-              name="optiontwo"
+              name="optionTwoText"
               className="form-control"
               id="optiontwo"
               placeholder="Enter Option Two Text Here"
-              value={this.state.optionTwo}
+              value={optionTwoText}
               onChange={this.handleChange}
             />
           </div>
@@ -73,6 +70,7 @@ class NewPollQuestionsForm extends Component {
             type="submit"
             class="btn btn-success w-100"
             onClick={this.handleClick}
+            disabled={optionOneText === "" || optionTwoText === ""}
           >
             Submit
           </button>
