@@ -1,47 +1,43 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 
 class Login extends Component {
-  state = { authedUserId: "", login: false };
+  state = { authedUserId: "", isAuthenticated: this.props.authenticate };
 
   handleChange = (event) => {
-    this.setState({ authedUserId: event.target.value });
+    this.setState(
+      { authedUserId: event.target.value },
+      console.log(this.state.authedUserId)
+    );
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({
-      login: true,
-    });
+    this.props.login(this.state.authedUserId);
   };
 
   render() {
-    const { login } = this.state;
-    if (login === true) {
-      return <Redirect to="/home" />;
-    }
     return (
       <form onSubmit={this.handleSubmit}>
-        {/* <div className="form-group"> */}
-        <label>
-          <select
-            value={this.state.authedUserId}
-            className="form-control"
-            onChange={this.handleChange}
-          >
-            <option>Select One</option>
-            <option value="sarahedo">Sarah Edo</option>
-            <option value="tylermcginnis">Tyler McGinnis</option>
-            <option value="johndoe">John Doe</option>
-          </select>
-        </label>
-        <input
-          type="submit"
-          value="Submit"
-          onClick={() => this.props.setAuthedUser(this.state.authedUserId)}
-        />
-        {/* </div> */}
+        <div className="form-group">
+          <label>
+            <select
+              value={this.state.authedUserId}
+              className="form-control"
+              onChange={this.handleChange}
+            >
+              <option>Select One</option>
+              <option value="sarahedo">Sarah Edo</option>
+              <option value="tylermcginnis">Tyler McGinnis</option>
+              <option value="johndoe">John Doe</option>
+            </select>
+          </label>
+          <input
+            type="submit"
+            value="Submit"
+            onClick={() => this.props.setAuthedUser(this.state.authedUserId)}
+          />
+        </div>
       </form>
     );
   }

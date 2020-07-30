@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
 import HomePage from "./HomePage";
@@ -18,34 +18,60 @@ class App extends Component {
   }
 
   state = {
-    isLogin: false,
+    isAuthenticated: false,
   };
 
+  login = (id) => {
+    if (this.props.userId.includes(id)) {
+      this.setState({
+        isAuthenticated: true,
+      });
+    }
+  };
+
+  // logout = () => {};
+
   render() {
-    const { isLogin } = this.state;
+    const { isAuthenticated } = this.state;
+    const { userId } = this.props;
+    console.log(userId, isAuthenticated);
+
     return (
       <BrowserRouter>
         <div className="App">
-          <NavBar isLogin={isLogin} />
+          <NavBar isAuthenticated={isAuthenticated} />
           <LoadingBar />
           <Switch>
-            <Route exact path="/login" render={() => <Login />} />
+            <Route
+              exact
+              path="/login"
+              render={() => (
+                <Login
+                  userId={userId}
+                  login={this.login}
+                  authenticate={isAuthenticated}
+                />
+              )}
+            />
             <ProtectedRoute
+              isAuthenticated={isAuthenticated}
               exact
               path="/"
               render={() => (this.props.loading === true ? null : <HomePage />)}
             />
             <ProtectedRoute
+              isAuthenticated={isAuthenticated}
               exact
               path="/add"
               render={() => <NewPollQuestionsForm />}
             />
             <ProtectedRoute
+              isAuthenticated={isAuthenticated}
               exact
               path="/leaderboard"
               render={() => <LeaderBoard />}
             />
-            <ProtectedRoute render={() => <NotFoundPage />} />
+            <Route render={() => <NotFoundPage />} />
           </Switch>
         </div>
       </BrowserRouter>
@@ -53,8 +79,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, users }) {
   return {
+    userId: Object.keys(users),
     loading: authedUser === null,
   };
 }

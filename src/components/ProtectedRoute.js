@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
 class ProtectedRoute extends Component {
   render() {
+    const { isAthenticated } = this.props;
     const Component = this.props.component;
-    const isAuthenticated = false;
-    return isAuthenticated ? (
-      <Component />
+
+    return isAthenticated ? (
+      <Route exact path="/add" render={() => <Component />} />
     ) : (
       <Redirect to={{ pathname: "/login" }} />
     );
