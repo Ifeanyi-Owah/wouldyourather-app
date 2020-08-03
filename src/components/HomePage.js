@@ -31,7 +31,7 @@ class HomePage extends Component {
     const unanswered = questionId.filter(
       (question, i) => !questionId.includes(answered[i])
     );
-
+    console.log(authedUser);
     return (
       <div
         className="mt-4"

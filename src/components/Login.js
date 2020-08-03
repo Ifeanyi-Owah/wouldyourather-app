@@ -7,6 +7,7 @@ class Login extends Component {
   handleChange = (event) => {
     this.setState(
       { authedUserId: event.target.value },
+      () => this.props.setAuthedUser(this.state.authedUserId),
       console.log(this.state.authedUserId)
     );
   };
@@ -17,6 +18,13 @@ class Login extends Component {
   };
 
   render() {
+    const { authedUser, location, history } = this.props;
+    let { from } = location.state || { from: { pathname: "/" } };
+    console.log(authedUser);
+    const handleClick = () => {
+      return history.replace(from);
+    };
+
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -32,11 +40,7 @@ class Login extends Component {
               <option value="johndoe">John Doe</option>
             </select>
           </label>
-          <input
-            type="submit"
-            value="Submit"
-            onClick={() => this.props.setAuthedUser(this.state.authedUserId)}
-          />
+          <input type="button" value="Submit" onClick={handleClick} />
         </div>
       </form>
     );
@@ -49,4 +53,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+function mapStateToProps({ authedUser }) {
+  return {
+    authedUser,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

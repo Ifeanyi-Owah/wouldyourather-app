@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
 import HomePage from "./HomePage";
@@ -33,27 +39,31 @@ class App extends Component {
 
   render() {
     const { isAuthenticated } = this.state;
-    const { userId } = this.props;
-    console.log(userId, isAuthenticated);
+    const { userId, authedUser } = this.props;
+    console.log(authedUser);
 
     return (
       <BrowserRouter>
         <div className="App">
-          <NavBar isAuthenticated={isAuthenticated} />
+          {/* <NavBar isAuthenticated={isAuthenticated} /> */}
+          <NavBar />
           <LoadingBar />
           <Switch>
             <Route
               exact
               path="/login"
-              render={() => (
-                <Login
-                  userId={userId}
-                  login={this.login}
-                  authenticate={isAuthenticated}
-                />
+              render={(routeProps) => (
+                <Login userId={userId} login={this.login} {...routeProps} />
               )}
             />
-            <ProtectedRoute
+            {/* <Route
+              exact
+              path="/"
+              render={() => (this.props.loading === true ? null : <HomePage />)}
+            />
+            <Route exact path="/add" render={() => <NewPollQuestionsForm />} />
+            <Route exact path="/leaderboard" render={() => <LeaderBoard />} /> */}
+            {/* <ProtectedRoute
               isAuthenticated={isAuthenticated}
               exact
               path="/"
@@ -70,6 +80,22 @@ class App extends Component {
               exact
               path="/leaderboard"
               render={() => <LeaderBoard />}
+            /> */}
+            <ProtectedRoute
+              exact
+              path="/"
+              // render={() => <HomePage />}
+              render={() => (this.props.loading === true ? null : <HomePage />)}
+            />
+            <ProtectedRoute
+              exact
+              path="/add"
+              render={() => <NewPollQuestionsForm />}
+            />
+            <ProtectedRoute
+              exact
+              path="/leaderboard"
+              render={() => <LeaderBoard />}
             />
             <Route render={() => <NotFoundPage />} />
           </Switch>
@@ -83,6 +109,7 @@ function mapStateToProps({ authedUser, users }) {
   return {
     userId: Object.keys(users),
     loading: authedUser === null,
+    authedUser,
   };
 }
 
